@@ -47,7 +47,7 @@ export const StudyCardsMain = (Decks) => {
       setTitle(response.name);
       setDescription(response.description);
       setCards(response.cards);
-      console.log(response.cards[cardId]);
+
       // const found = response.cards.find(element => element.id == cardId );
       // console.log(found)
       // setFormData(found);
@@ -80,29 +80,28 @@ export const StudyCardsMain = (Decks) => {
   }
 
   const cardForm = Cards.map((v, idx) => {
+    console.log(v.id);
     let cardId = v.id;
-    // readCard(cardId).then((response) => {
-    //   let frontCard = response.front;
-    //   let backCard = response.back;
-    // });
-
-    let Card = (
-      <React.Fragment>
-        <div key = {cardId}>
-        <div class="card" style={{ width: 1000 }}>
-          <div class="row">
-            <div class="column card-body">{v.front}</div>
-            <div class="column card-body">{v.back}</div>
+    // let key = v.id;
+    // let cardId = v.id;
+    //     // readCard(cardId).then((response) => {
+    //     //   let frontCard = response.front;
+    //     //   let backCard = response.back;
+    //     // });
+    return (
+      <div key={idx}>
+        <div className="card" style={{ width: 1000 }}>
+          <div className="row">
+            <div className="column card-body">{v.front}</div>
+            <div className="column card-body">{v.back}</div>
           </div>
         </div>
         <NavLink to={`/decks/${deckId}/cards/${cardId}/edit`}>
-          <button class> Edit </button>
+          <button> Edit </button>
         </NavLink>
         <button onClick={() => deleteCardHandler(cardId)}>Delete</button>
-        </div>
-      </React.Fragment>
+      </div>
     );
-    return Card;
   });
 
   return (
