@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import { readDeck } from "../utils/api";
 import { readCard } from "../utils/api";
+import CardComponet from "../Componets/CardComponet";
 import Header from "../Layout/Header";
 
 function EditCardMain({ header, initialFormData, submitHandler }) {
@@ -58,39 +59,15 @@ function EditCardMain({ header, initialFormData, submitHandler }) {
   return (
     <React.Fragment>
       <Header />
-      <form onSubmit={handleFormSubmit}>
-        <h3>{header}</h3>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href={`/decks/${deckId}`}>{Title}</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              {`Edit Card ${cardId}`}
-            </li>
-          </ol>
-        </nav>
-        <label htmlFor="front">front</label>
-        <textarea
-          type="text"
-          name="front"
-          id="front"
-          value={formData.front}
-          onChange={handleInput}
-        />
-        <label htmlFor="back">back</label>
-        <textarea
-          type="text"
-          name="back"
-          id="back"
-          value={formData.back}
-          onChange={handleInput}
-        />
-        <input type="submit" />
-      </form>
+      <CardComponet
+        handleFormSubmit={handleFormSubmit}
+        header={header}
+        deckId={deckId}
+        Title={Title}
+        cardId={cardId}
+        formData={formData}
+        handleInput={handleInput}
+      />
       <NavLink to={`/decks/${deckId}`}>
         <button> Cancel </button>
       </NavLink>
