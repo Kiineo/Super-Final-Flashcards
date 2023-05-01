@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import { readDeck } from "../utils/api";
 import {
   BrowserRouter as Router,
-  Route,
   Link,
-  Switch,
   useHistory,
-  useLocation,
-  useRouteMatch,
   useParams,
+  NavLink,
 } from "react-router-dom";
 
 function Study() {
@@ -25,18 +22,18 @@ function Study() {
   let [cardIndex, setCardIndex] = useState(0);
   const [show, setShow] = useState(true);
 
-  //const { path, url, params: {deckId} } = useRouteMatch();
-
   function flipHandler() {
     if (side) {
       setSide(false);
       setShow(!show);
     } else {
       setSide(true);
+      setShow(!show);
     }
   }
 
   function nextHandler() {
+    setSide(true);
     setCardIndex(cardIndex + 1);
     setShow(!show);
     if (cardIndex >= deck.cards.length - 1) {
@@ -45,17 +42,11 @@ function Study() {
           "Restart cards?\nClick 'cancel' to return to the home page"
         )
       ) {
-        //window.location.replace(`/decks/${deckId}/study`)
         history.go(0);
       } else {
-        //window.location.replace(`/`)
         history.push("/");
       }
     }
-  }
-
-  function addBtnHandler() {
-    alert("hello");
   }
 
   useEffect(() => {
@@ -89,7 +80,9 @@ function Study() {
               cards in this deck.
             </p>
 
-            <button onClick={addBtnHandler}>+ Add Cards</button>
+            <NavLink to={`/decks/${deckId}/cards/new`}>
+              <button>+ Add New</button>
+            </NavLink>
           </div>
         </div>
       </div>
