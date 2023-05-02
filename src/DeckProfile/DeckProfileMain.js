@@ -75,6 +75,7 @@ export const StudyCardsMain = (Decks) => {
     if (confirmationMessage) {
       deleteDeck(deckId).then((response) => {
         history.push("/");
+        history.go(0);
       });
     }
   }
