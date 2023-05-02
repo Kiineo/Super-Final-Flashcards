@@ -61,10 +61,10 @@ export const StudyCardsMain = (Decks) => {
     );
     if (confirmationMessage) {
       deleteCard(cardId).then((response) => {
-        history.push(`${url}`);
+        history.go(0);
       });
     } else {
-      history.push(`${url}`);
+      history.go(0);
     }
   }
 
